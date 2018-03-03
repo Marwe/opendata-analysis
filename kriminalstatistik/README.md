@@ -4,4 +4,12 @@ Dokumentation ist direkt im sourcefile enthalten, Dokumenterzeugung mit
 
 	rmarkdown::render("kstat.R")
 
-Eine gerenderte Version ist unter https://mqtt.opendataset.click/kstat/kstat.html verfügbar.
+Eine gerenderte Version ist unter 
+https://kriminalstatistik.machen.click
+verfügbar.
+
+Die Daten von 2016 haben Kommas als Tausenderseparatoren, die in einer Vorprozessierung entfernt wurden (Handhabung direkt in R eher schwierig):
+
+`gunzip -k -c ZR-F-01-T01_csv.csv.gz | ./removethousandscomma.sed |gzip > ZR-F-01-T01_csv_cleanup.csv.gz`
+
+

@@ -81,3 +81,43 @@ ten aufbrach
 > panderOptions('table.split.table', Inf)
 > panderOptions('table.style', 'rmarkdown')
 
+## Daten 2015/2016
+
+`gunzip -k -c tb01__FaelleGrundtabelleAb1987__csv.csv.gz | head`
+
+~~~
+1;2;3;4;5;6;7;8;9;10;11;12;13;14
+Schluesse;Straftat;Jahr;erfasste Faelle;HZ vor Zensus bis 2013;HZ nach Zensus ab2013;Versuche - Anzahl;Versuche - Anteil in %;mit Schusswaffe gedroht;mit Schusswaffe geschossen;Aufklaerungsquote in %;Tatverdaechtige insgesamt;Nichtdeutsche Tatverdaechtige - Anzahl;Nichtdeutsche Tatverdaechtige - Anteil in %
+------;Straftaten insgesamt;1987;4444108;7268.7;-;382623;8.6;6564;5429;44.2;1290441;258329;20
+------;Straftaten insgesamt;1988;4356726;7114.4;-;371110;8.5;6639;4976;45.9;1314080;286741;21.8
+~~~
+
+`gunzip -k -c ZR-F-01-T01_csv.csv.gz | head`
+
+~~~
+1;2;3;4;5;6;7;8;9;10;11;12;13;14
+Schluesse;Straftat;Jahr;erfasste Faelle;HZ vor Zensus bis 2013;HZ nach Zensus ab2013;Versuche - Anzahl;Versuche - Anteil in %;mit Schusswaffe gedroht;mit Schusswaffe geschossen;Aufklaerungsquote in %;Tatverdaechtige insgesamt;Nichtdeutsche Tatverdaechtige - Anzahl;Nichtdeutsche Tatverdaechtige - Anteil in %
+------;Straftaten insgesamt;1987;4,444,108;7,268.70;-;382,623;8.6;6,564;5,429;44.2;1,290,441;258,329;20
+------;Straftaten insgesamt;1988;4,356,726;7,114.40;-;371,110;8.5;6,639;4,976;45.9;1,314,080;286,741;21.8
+~~~
+
+## Änderungen in CSV von 2015/2016
+
+Das Script steigt bei den neuen Daten aus mit:
+ 
+ > Fehler in summarise_impl(.data, dots) : 
+ > Evaluation error: 'max' not meaningful for factors.
+
+~~~
+str(kd)
+'data.frame':	11289 obs. of  14 variables:
+ $ erfasste.Fälle                       : Factor w/ 7027 levels "0","1","10","100",..: 4450 4393 4395 4456 4677 4947 5802 5673 5751 5743 ...
+~~~
+
+Oops, warum sind das plötzlich *Factors*? Vorher:
+
+~~~
+str(okd)
+'data.frame':	10475 obs. of  14 variables:
+$ erfasste.Fälle                       : int  4444108 4356726 4358573 4455333 4752175 5209060 6750613 6537748 6668717 6647598 ...
+~~~

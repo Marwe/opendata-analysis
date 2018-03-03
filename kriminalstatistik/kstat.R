@@ -1,5 +1,5 @@
 #' ---
-#' title: "Kriminalstatistik grafisch 2016"
+#' title: "Kriminalstatistik grafisch 2017"
 #' author: "Martin Weis"
 #' output: 
 #'     html_document:
@@ -39,7 +39,7 @@
 #' Da sich diese Daten auf das gesamte Bundesgebiet beziehen, sind lokal anders verlaufende Fallzahlen möglich und wahrscheinlich (z.B. zeitlich/örtlich eingeschränkt ein Anstieg bei Einbrüchen).
 #' 
 #' ## Quellen
-#' http://www.bka.de/DE/Publikationen/PolizeilicheKriminalstatistik/pks__node.html
+#' https://www.bka.de/DE/AktuelleInformationen/StatistikenLagebilder/PolizeilicheKriminalstatistik/pks_node.html
 #'  http://www.bka.de/DE/Publikationen/PolizeilicheKriminalstatistik/2015/2015Zeitreihen/pks2015ZeitreihenFaelleUebersicht.html
 #'  http://www.bka.de/SharedDocs/Downloads/DE/Publikationen/PolizeilicheKriminalstatistik/2015/Zeitreihen/Faelle/tb01__FaelleGrundtabelleAb1987__csv,templateId=raw,property=publicationFile.csv/tb01__FaelleGrundtabelleAb1987__csv.csv
 #' 
@@ -47,7 +47,9 @@
 #' Es gilt die Datenlizenz Deutschland - Namensnennung - Version 2.0 
 #' > https://www.govdata.de/dl-de/by-2-0
 #'
+#' Quellcode via git: [github.com/Marwe/opendata-analysis/](https://github.com/Marwe/opendata-analysis/)
 #' render script in R with ```rmarkdown::render("kstat.R")```
+#' 
 
 if (!exists("maxplots")){maxplots=20000}
 
@@ -58,20 +60,53 @@ require("pander")
 panderOptions('table.split.table', Inf)
 panderOptions('table.style', 'rmarkdown')
 
-csvfilename="tb01__FaelleGrundtabelleAb1987__csv.csv.gz"
+# header changed 2016, 
+# but since order is the same, lets also read the old one and replace the names in the new
+ocsvfilename="tb01__FaelleGrundtabelleAb1987__csv.csv.gz"
+
+# 2016 data has comma as thousands separator (wtf?!?)
+# https://stackoverflow.com/questions/25088144/how-to-load-df-with-1000-separator-in-r-as-numeric-class/25090565#25090565
+# library(methods)
+# setClass("chr.w.commas", contains=numeric())
+# setAs("character", "chr.w.commas", function(from) 
+#                               as.numeric(gsub("\\,", "",from )) )
+# 
+# kd<-read.csv("ZR-F-01-T01_csv.csv.gz", header=TRUE, skip=1, sep=";", colClasses="chr.w.commas")
+
+# clumsy, so use preprocessing script removethousandscomma.sed
+# gunzip -k -c ZR-F-01-T01_csv.csv.gz | ./removethousandscomma.sed |gzip > ZR-F-01-T01_csv_cleanup.csv.gz
+# dataset until 2016, 
+# csvfilename="ZR-F-01-T01_csv.csv.gz"
+csvfilename="ZR-F-01-T01_csv_cleanup.csv.gz"
+
 
 kd<-read.csv(csvfilename,sep=";",
              skip=1,
              header=TRUE,
-             encoding="latin1")
+             encoding="latin1",
+             na.strings=c("-", "------")
+             )
+# , colClasses="chr.w.commas" 
 
-kd.header<-as.vector(t(read.csv(csvfilename,sep=";",
+# read the old header
+okd<-read.csv(ocsvfilename,sep=";",
+             skip=1,
+             nrows=0,
+             header=TRUE,
+             encoding="latin1",
+             na.strings=c("-", "------"))
+# exchange the header
+names(kd)<-names(okd)
+
+# read from OLD file
+kd.header<-as.vector(t(read.csv(ocsvfilename,sep=";",
              skip=1,
              header=FALSE,
              nrows=1,
              encoding="latin1")))
 
 #pandoc.table(kd[1:4,], style = "grid", caption = "First lines of source data")
+head(okd,n=1)
 head(kd,n=3)
 
 # styp <- group_by(kd, Straftat)
@@ -101,6 +136,7 @@ plotkstat<-function(kd,sortst=NA,maxplots=99999999){
         
         pdat<-kd[kd$Straftat==s,]#filter(kd,Straftat==s)
         
+        # adapted to 
         p<-ggplot(pdat,aes(Jahr,erfasste.Fälle, color = "Gesamtfälle"))+ 
         geom_line()+
         geom_point()+
