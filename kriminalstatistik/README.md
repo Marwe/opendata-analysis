@@ -13,3 +13,6 @@ Die Daten von 2016 haben Kommas als Tausenderseparatoren, die in einer Vorprozes
 `gunzip -k -c ZR-F-01-T01_csv.csv.gz | ./removethousandscomma.sed |gzip > ZR-F-01-T01_csv_cleanup.csv.gz`
 
 
+# 2023
+
+`gunzip -k -c 2023-ZR-F-01-T01-Faelle_csv.csv.gz | ./removethousandscomma.sed |gzip > 2023-ZR-F-01-T01-Faelle_cleanup.csv.gz`

@@ -17,7 +17,7 @@
 #' 
 #' In diesem Dokument werden Plots der Rohdaten der Kriminalstatistik des BKA 
 #' erstellt. Aus der Fragestellung heraus, dass in der öffentlichen Wahrnehmung, z.B. durch Aussagen in TV-Shows und anderen Medienberichten 
-#' immer wieder der Eindruck geweckt wird, dass die Kriminalität ansteigt. 
+#' immer wieder der Eindruck erweckt wird, dass die Kriminalität ansteigt. 
 #' In letzter Zeit häufen sich darüberhinaus Aussagen, die eine erhöhte Kriminalität von Ausländern darstellen.
 #' Diese Aussagen werden nach meiner Wahrnehmung zunehmend nicht nur von Populisten, sondern auch Politikern und Beamten gemacht, die eigentlich entsprechenden Zuganng zu den Zahlen haben sollten.
 #' 
@@ -42,6 +42,7 @@
 #' https://www.bka.de/DE/AktuelleInformationen/StatistikenLagebilder/PolizeilicheKriminalstatistik/pks_node.html
 #'  http://www.bka.de/DE/Publikationen/PolizeilicheKriminalstatistik/2015/2015Zeitreihen/pks2015ZeitreihenFaelleUebersicht.html
 #'  http://www.bka.de/SharedDocs/Downloads/DE/Publikationen/PolizeilicheKriminalstatistik/2015/Zeitreihen/Faelle/tb01__FaelleGrundtabelleAb1987__csv,templateId=raw,property=publicationFile.csv/tb01__FaelleGrundtabelleAb1987__csv.csv
+#'  https://www.bka.de/SharedDocs/Downloads/DE/Publikationen/PolizeilicheKriminalstatistik/2023/Interpretation/Faelle/ZR-F-01-T01-Faelle_csv.csv?__blob=publicationFile&v=3
 #' 
 #' Die Nutzung der Daten (vollständig oder auszugsweise) ist nur mit Quellenangabe (PKS Bundeskriminalamt, Angabe der Version) zulässig. 
 #' Es gilt die Datenlizenz Deutschland - Namensnennung - Version 2.0 
@@ -51,6 +52,7 @@
 #' render script in R with ```rmarkdown::render("kstat.R")```
 #' 
 
+yearversion=2016
 if (!exists("maxplots")){maxplots=20000}
 
 require("ggplot2")
@@ -64,7 +66,7 @@ panderOptions('table.style', 'rmarkdown')
 # but since order is the same, lets also read the old one and replace the names in the new
 ocsvfilename="tb01__FaelleGrundtabelleAb1987__csv.csv.gz"
 
-# 2016 data has comma as thousands separator (wtf?!?)
+# 2016 (2023) data has comma as thousands separator (wtf?!?)
 # https://stackoverflow.com/questions/25088144/how-to-load-df-with-1000-separator-in-r-as-numeric-class/25090565#25090565
 # library(methods)
 # setClass("chr.w.commas", contains=numeric())
@@ -75,9 +77,10 @@ ocsvfilename="tb01__FaelleGrundtabelleAb1987__csv.csv.gz"
 
 # clumsy, so use preprocessing script removethousandscomma.sed
 # gunzip -k -c ZR-F-01-T01_csv.csv.gz | ./removethousandscomma.sed |gzip > ZR-F-01-T01_csv_cleanup.csv.gz
-# dataset until 2016, 
+# dataset until 2016, 2023
 # csvfilename="ZR-F-01-T01_csv.csv.gz"
-csvfilename="ZR-F-01-T01_csv_cleanup.csv.gz"
+#csvfilename="ZR-F-01-T01_csv_cleanup.csv.gz"
+csvfilename="2023-ZR-F-01-T01-Faelle_cleanup.csv.gz"; yearversion=2023
 
 
 kd<-read.csv(csvfilename,sep=";",
@@ -95,8 +98,16 @@ okd<-read.csv(ocsvfilename,sep=";",
              header=TRUE,
              encoding="latin1",
              na.strings=c("-", "------"))
+
+oldheader=names(okd)
+if ( 2023 == yearversion ){
+    # kd header has removed the addional column "HZ.....nach.Zenus.2011.ab.2013", only HZ exists [5]
+    oldheader = oldheader[! oldheader %in% c("HZ.....nach.Zenus.2011.ab.2013")]
+    oldheader[5]="HZ"
+
+}
 # exchange the header
-names(kd)<-names(okd)
+names(kd)<-oldheader
 
 # read from OLD file
 kd.header<-as.vector(t(read.csv(ocsvfilename,sep=";",
@@ -122,9 +133,9 @@ smost<-arrange(
                ,desc(mx))
 
 # plot function 
-plotkstat<-function(kd,sortst=NA,maxplots=99999999){
+plotkstat<-function(kd,sortst=NULL,maxplots=99999999){
     plotcnt=0
-    if (is.na(sortst)){sortst=unique(kd$Straftat);}
+    if (is.null(sortst)){sortst=unique(kd$Straftat);}
     for (s in sortst){
         plotcnt=plotcnt+1
         if (plotcnt>=maxplots){break;}
