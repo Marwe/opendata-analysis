@@ -40,6 +40,9 @@
 #' 
 #' Da sich diese Daten auf das gesamte Bundesgebiet beziehen, sind lokal anders verlaufende Fallzahlen möglich und wahrscheinlich (z.B. zeitlich/örtlich eingeschränkt ein Anstieg bei Einbrüchen).
 #' 
+#' Es gibt berechtigte Kritik an der Nutzung der Zahlen für politische Entscheidungen, da diese zum einen leicht manipulierbar sind (durch Entscheidungen seitens der Polizei) und den großen Teil der nicht zur Anzeige gebrachten Kriminalität nicht enthält. 
+#' Wissenschaftliche Herangehensweisen sind da deutlich belastbarer, wer sich dafür interessiert, sollte nach dem Begriff Dunkelfeldstudie schauen (Beispiel: [Sicherheit und Kriminalität in Deutschland (2020)](https://www.bka.de/SharedDocs/Downloads/DE/Publikationen/Publikationsreihen/Forschungsergebnisse/SKiD2020_Ergebnisse_V1.4.pdf?__blob=publicationFile&v=24)) 
+#' 
 #' ## Quellen
 #' https://www.bka.de/DE/AktuelleInformationen/StatistikenLagebilder/PolizeilicheKriminalstatistik/pks_node.html
 #'  http://www.bka.de/DE/Publikationen/PolizeilicheKriminalstatistik/2015/2015Zeitreihen/pks2015ZeitreihenFaelleUebersicht.html
