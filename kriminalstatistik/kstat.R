@@ -1,5 +1,5 @@
 #' ---
-#' title: "Kriminalstatistik grafisch 2017"
+#' title: "Kriminalstatistik grafisch 2023"
 #' author: "Martin Weis"
 #' output: 
 #'     html_document:
@@ -30,6 +30,8 @@
 #' Hingegen zeigen verschiedene Körperverletzungsdelikte eine steigende Tendenz. 
 #' Hier wäre zu klären, ob es sich um tatsächlich stark ansteigende Fallzahlen handelt, oder ob der Anstieg aus einer größeren Bereitschaft zur Anzeige resultiert (hohe Dunkelziffer).
 #' 
+#' Update 2023: es sind in vielen Bereichen Anstiege nach der Pandemie zu erkennen, unter anderem bei Diebstählen.
+#'  
 #' ## Zur Beachtung
 #' 
 #' Die Zahlen scheinen erst seit 1995 soweit konsolodiert zu sein, dass sie Trends zeigen können, vorher möglicherweise inkohärente Erfassung (neue/alte Bundesländer).
