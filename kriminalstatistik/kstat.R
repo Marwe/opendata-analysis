@@ -49,6 +49,12 @@
 #'  http://www.bka.de/SharedDocs/Downloads/DE/Publikationen/PolizeilicheKriminalstatistik/2015/Zeitreihen/Faelle/tb01__FaelleGrundtabelleAb1987__csv,templateId=raw,property=publicationFile.csv/tb01__FaelleGrundtabelleAb1987__csv.csv
 #'  https://www.bka.de/SharedDocs/Downloads/DE/Publikationen/PolizeilicheKriminalstatistik/2023/Interpretation/Faelle/ZR-F-01-T01-Faelle_csv.csv?__blob=publicationFile&v=3
 #' 
+#' ## Weitere Informationen und Analysen
+#' 
+#' * [PKS: Wie dich BILD, AfD & Co. über Kriminalität belügen](https://www.volksverpetzer.de/analyse/pks-bild-afd-kriminalitaet-beluegen/) (von Thomas Laschyk, Sophie Scheingraber 2024-04-19), mit weiteren, lesenswerten Quellen
+#' 
+#' ## Lizenzen, Code
+#' 
 #' Die Nutzung der Daten (vollständig oder auszugsweise) ist nur mit Quellenangabe (PKS Bundeskriminalamt, Angabe der Version) zulässig. 
 #' Es gilt die Datenlizenz Deutschland - Namensnennung - Version 2.0 
 #' > https://www.govdata.de/dl-de/by-2-0
