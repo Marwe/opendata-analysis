@@ -38,9 +38,15 @@
 #' Siehe Plot "Straftaten insgesamt"
 #' Manche Grafiken zeigen nur kurze Zeitabschnitte, immer die x-Achse beachten!
 #' 
-#' Da sich diese Daten auf das gesamte Bundesgebiet beziehen, sind lokal anders verlaufende Fallzahlen möglich und wahrscheinlich (z.B. zeitlich/örtlich eingeschränkt ein Anstieg bei Einbrüchen).
+#' Da sich diese Daten auf das gesamte Bundesgebiet beziehen, sind lokal anders verlaufende Fallzahlen möglich und wahrscheinlich (z.B. zeitlich/örtlich eingeschränkt ein Anstieg bei Einbrüchen oder Deliktzahlen an großen Flughäfen, die der lokalen Region zugeschrieben werden).
 #' 
-#' Es gibt berechtigte Kritik an der Nutzung der Zahlen für politische Entscheidungen, da diese zum einen leicht manipulierbar sind (durch Entscheidungen seitens der Polizei) und den großen Teil der nicht zur Anzeige gebrachten Kriminalität nicht enthält. 
+#' Wesentliche Kritikpunkte sind: die Daten werden von der Polizei zu internen Zwecken erhoben, einige Bereiche fehlen komplett (Terrorismus, Extremismus, Verstöße gegen Landesgesetze und natürlich alle Ordnungswidrigkeiten).
+#' Es werden nur Verdächtige verzeichnet, daraus lässt sich nicht auf tatsächliche Täter schließen.
+#' Auch die Einordnung 'ausländisch' ist wenig hilfreich, da hierunter unter anderem Reisende fallen (wie auch Straftaten Deutscher im Ausland fehlen).
+#' Für eine Interpretation müssen also noch weitere Daten (z.B. Bevölkerungszahlen und Änderungen in der Gesetzen, die zu veränderter Erfassung oder neuen Straftatbeständen führen können) herangezogen werden, um die Verhältnisse passend abzubilden und vergleichen zu können.
+#' Änderungen in Gesetzen können zu neuen Straftatbeständen oder einer veränderten Erfassung führen (Aggregation oder Aufteilung von Fallzahlen auf mehrere Katerorien), Diskonituitäten daher jeweils mit Vorsicht zu interpretieren.
+#' 
+#' Es gibt dementsprechend berechtigte Kritik an der Nutzung der Zahlen für politische Entscheidungen, da diese zum einen leicht manipulierbar sind (durch Entscheidungen seitens der Polizei) und den großen Teil der nicht zur Anzeige gebrachten Kriminalität nicht enthält. 
 #' Wissenschaftliche Herangehensweisen sind da deutlich belastbarer, wer sich dafür interessiert, sollte nach dem Begriff Dunkelfeldstudie schauen (Beispiel: [Sicherheit und Kriminalität in Deutschland (2020)](https://www.bka.de/SharedDocs/Downloads/DE/Publikationen/Publikationsreihen/Forschungsergebnisse/SKiD2020_Ergebnisse_V1.4.pdf?__blob=publicationFile&v=24)) 
 #' 
 #' ## Quellen
